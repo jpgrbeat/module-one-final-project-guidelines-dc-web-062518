@@ -1,6 +1,31 @@
 class Dealership < ActiveRecord::Base
   has_many :cars
   # has_many :customers, through: :cars
+  # puts "1. Update dealship info"
+  # puts "2. Add a car to inventory"
+  # puts "3. Remove a car from inventory"
+  # puts "4. Update vehicle information"
+  # puts "5. Exit"
+  def function_finder
+    input = gets.chomp
+
+    case input
+    when '1'
+      self.update_dealer_info
+    when '2'
+      self.create_new_car
+    when '3'
+      delete_car
+    when '4'
+       self.update_price
+    when '5'
+      dealer_cars_output
+    when '6'
+      self.exit_message
+    else
+      puts "invalid input"
+    end
+  end
 
   def welcome_dealer
     puts "Welcome #{self.name}!"
@@ -42,10 +67,90 @@ class Dealership < ActiveRecord::Base
     vehicle.dealership_id = self.id
     vehicle.save
 
-    # print_vehicle(vehicle)
-    # puts "Vehicle added!"
+    print_vehicle(vehicle)
+    puts "Vehicle added!"
     # save_prompt(vehicle)
   end
 
+  def update_dealer_info
+    puts "What would you like to update?"
+    puts "1. Name"
+    puts "2. Location"
+    puts "3. Phone Number"
+    puts "4. Website url"
+    puts "5. Cancel"
+
+    id = self.id
+    sym = name
+    case gets.chomp
+    when '1'
+      puts " What would you like to update the name to?"
+      input = gets.chomp
+      Dealership.update(id, name: input)
+    when '2'
+      puts 'What is the new location?'
+      input = gets.chomp
+      Dealership.update(id, location: input)
+    when '3'
+      puts "What would you like to change the phone number to?"
+      input = gets.chomp
+      Dealership.update(id, phone: input)
+    when '4'
+      puts "What's the new url?"
+      input = gets.chomp
+      Dealership.update(id, website: input)
+    when '5'
+      return ""
+    else
+      puts "Not valid input."
+      puts ""
+      update_dealer_info
+    end
+  end
+
+  def delete_dealer
+    puts "Are you sure you want to delete this dealership from the system?"
+    #yes/no reader
+    self.destroy
+    puts "Dealership destroyed!"
+  end
+
+  def dealer_cars_output
+    self.cars.each do |car|
+      puts ""
+      puts "Stock number :#{car.stock_number}"
+      puts "Year : #{car.year}"
+      puts "Make :#{car.make}"
+      puts "Model :#{car.model}"
+      ""
+    end
+  end
+
+  def update_price
+    puts "Which vehicle would you like to update the price on?"
+    vehicle = find_by_stock_number
+    if vehicle.dealership_id != self.id
+      puts "This vehicle does not exist in your inventory"
+      update_price
+    else
+      puts "#{vehicle.price} is the current price,"
+      puts "what would you like to change it to?"
+      puts ""
+
+      vehicle.price = gets.chomp
+      save_prompt(vehicle)
+
+      print_vehicle(vehicle)
+      puts "Vehicle Price: #{vehicle.price}"
+    end
+  end
+
+
+  def exit_message
+    puts "Goodbye"
+    # binding.pry
+    return "exit"
+
+  end
 
 end

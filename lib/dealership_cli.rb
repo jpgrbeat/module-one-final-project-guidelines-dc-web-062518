@@ -10,7 +10,7 @@ def ask_for_dealership_name
 end
 
 def find_dealer_by_name(dealer_name)
-   Dealership.find_by(name: dealer_name)
+   Dealership.find_by name: dealer_name
 end
 
 def check_if_dealership_exists(dealer)
@@ -20,14 +20,24 @@ def check_if_dealership_exists(dealer)
     puts ""
     puts "Yes or no?"
     input = gets.chomp.downcase
+    if input == 'yes'
+      create_new_dealership
+    else
+      puts "Ok, come back soon!"
+      exit_message
+    end
   else
-    output_dealership_info(dealer)
+    dealer.output_dealership_info
     puts "Is this correct?"
     puts ""
     puts "Yes or no?"
     input = gets.chomp.downcase
+    if input == "no"
+      n = ask_for_dealership_name
+      d = find_dealer_by_name(n)
+      check_if_dealership_exists(d)
+    end
   end
-  input
 end
 
 
@@ -68,7 +78,8 @@ def dealer_prompt
   puts "1. Update dealship info"
   puts "2. Add a car to inventory"
   puts "3. Remove a car from inventory"
-  puts "4. Update vehicle information"
-  puts "5. Exit"
+  puts "4. Update vehicle price"
+  puts "5. Print Inventory"
+  puts "6. Exit"
   puts ""
 end

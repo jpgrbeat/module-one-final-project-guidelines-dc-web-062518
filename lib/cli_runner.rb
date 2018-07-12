@@ -6,16 +6,16 @@ def welcome
   puts "Welcome to the makeshift inventory tool!"
 end
 
-def prompt
-  puts ""
-  puts "What would you like to do?"
-  puts "1. add a vehicle"
-  puts "2. delete a car from inventory"
-  puts "3. update a vehicle's price"
-  puts "4. print inventory"
-  puts "5. exit"
-  puts ""
-end
+# def prompt
+#   puts ""
+#   puts "What would you like to do?"
+#   puts "1. add a vehicle"
+#   puts "2. delete a car from inventory"
+#   puts "3. update a vehicle's price"
+#   puts "4. print inventory"
+#   puts "5. exit"
+#   puts ""
+# end
 
 def function_finder
   input = gets.chomp
@@ -51,6 +51,8 @@ def find_by_stock_number
   input = gets.chomp
 
   vehicle = Car.find_by(stock_number: input)
+  print_vehicle(vehicle)
+  # binding.pry
   if vehicle != nil
     return vehicle
   else
@@ -114,8 +116,8 @@ def delete_car
   vehicle = find_by_stock_number
 
   puts " Are you sure you want to delete this vehicle?"
-
-  case gets.chomp.downcase
+  input = gets.chomp.downcase
+  case input
   when "y"
     Car.destroy(vehicle.id)
   else
@@ -129,9 +131,4 @@ def print_inventory
   Car.all.each do |car|
     puts "#{print_vehicle(car)}"
   end
-end
-
-def exit_message
-  puts "Toodaloo mothafuckaaaa"
-  return "exit"
 end
