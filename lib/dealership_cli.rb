@@ -1,8 +1,9 @@
-# def welcome_dealer(dealer)
-#   puts "Welcome #{dealer.name}!"
-#   puts ""
-#   puts "This is your personalized inventory system."
-# end
+def welcome_dealer(dealer)
+  # binding.pry
+  puts "Welcome #{dealer.name}!"
+  puts ""
+  puts "This is your personalized inventory system."
+end
 
 def ask_for_dealership_name
   puts "Which dealership inventory would you like to see?"
@@ -21,10 +22,10 @@ def check_if_dealership_exists(dealer)
     puts "Yes or no?"
     input = gets.chomp.downcase
     if input == 'yes'
-      create_new_dealership
+      return create_new_dealership
     else
       puts "Ok, come back soon!"
-      exit_message
+      return "exit"
     end
   else
     dealer.output_dealership_info
@@ -58,6 +59,7 @@ def create_new_dealership
   puts ""
   puts "Last but not least, what's the url of your website?"
   dealer.website = gets.chomp
+  dealer.save
 
   dealer
 end

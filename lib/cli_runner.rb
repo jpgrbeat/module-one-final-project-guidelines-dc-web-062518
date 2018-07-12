@@ -96,21 +96,21 @@ def print_vehicle(car)
   puts "Vehicle Model: #{car.model}"
 end
 
-def update_price
-  puts "Which vehicle would you like to update the price on?"
-  vehicle = find_by_stock_number
-
-  puts "#{vehicle.price} is the current price,"
-  puts "what would you like to change it to?"
-  puts ""
-
-  vehicle.price = gets.chomp
-  save_prompt(vehicle)
-
-  print_vehicle(vehicle)
-  puts "Vehicle Price: #{vehicle.price}"
-
-end
+# def update_price
+#   puts "Which vehicle would you like to update the price on?"
+#   vehicle = find_by_stock_number
+#
+#   puts "#{vehicle.price} is the current price,"
+#   puts "what would you like to change it to?"
+#   puts ""
+#
+#   vehicle.price = gets.chomp
+#   save_prompt(vehicle)
+#
+#   print_vehicle(vehicle)
+#   puts "Vehicle Price: #{vehicle.price}"
+#
+# end
 
 def delete_car
   vehicle = find_by_stock_number

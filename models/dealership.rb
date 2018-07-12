@@ -27,11 +27,11 @@ class Dealership < ActiveRecord::Base
     end
   end
 
-  def welcome_dealer
-    puts "Welcome #{self.name}!"
-    puts ""
-    puts "This is your personalized inventory system."
-  end
+  # def welcome_dealer
+  #   puts "Welcome #{self.name}!"
+  #   puts ""
+  #   puts "This is your personalized inventory system."
+  # end
 
   def output_dealership_info
     puts "Dealership name: #{self.name}"
@@ -73,32 +73,37 @@ class Dealership < ActiveRecord::Base
   end
 
   def update_dealer_info
+    puts ""
+    output_dealership_info
+    puts ""
     puts "What would you like to update?"
     puts "1. Name"
     puts "2. Location"
     puts "3. Phone Number"
     puts "4. Website url"
     puts "5. Cancel"
+    puts ""
 
-    id = self.id
+
+
     sym = name
     case gets.chomp
     when '1'
       puts " What would you like to update the name to?"
       input = gets.chomp
-      Dealership.update(id, name: input)
+      self.update(name: input)
     when '2'
       puts 'What is the new location?'
       input = gets.chomp
-      Dealership.update(id, location: input)
+      self.update(location: input)
     when '3'
       puts "What would you like to change the phone number to?"
       input = gets.chomp
-      Dealership.update(id, phone: input)
+      self.update(phone: input)
     when '4'
       puts "What's the new url?"
       input = gets.chomp
-      Dealership.update(id, website: input)
+      self.update(website: input)
     when '5'
       return ""
     else
@@ -106,6 +111,7 @@ class Dealership < ActiveRecord::Base
       puts ""
       update_dealer_info
     end
+    output_dealership_info
   end
 
   def delete_dealer

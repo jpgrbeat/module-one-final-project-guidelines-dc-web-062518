@@ -12,16 +12,18 @@ dname = ask_for_dealership_name
 dealer = Dealership.find_by name: dname
 #checking to see if the object exists, if it doesn't
 #the user is prompted to create a new instance
-check_if_dealership_exists(dealer)
-# binding.pry
-dealer.welcome_dealer
-
-while loop_kill != "exit"
+ dealer = check_if_dealership_exists(dealer)
   # binding.pry
-  dealer_prompt
-  loop_kill = dealer.function_finder
+  if dealer != "exit"
+    welcome_dealer(dealer)
 
-end
+    while loop_kill != "exit"
+  # binding.pry
+      dealer_prompt
+      loop_kill = dealer.function_finder
+
+    end
+  end
 
  #  dealer = create_new_dealership
  # # dealer.save
