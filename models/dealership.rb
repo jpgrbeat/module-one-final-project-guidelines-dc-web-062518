@@ -1,6 +1,6 @@
 class Dealership < ActiveRecord::Base
   has_many :cars
-  # has_many :customers, through: :cars
+  has_many :customers, through: :cars
   # puts "1. Update dealship info"
   # puts "2. Add a car to inventory"
   # puts "3. Remove a car from inventory"
@@ -17,9 +17,10 @@ class Dealership < ActiveRecord::Base
     when '3'
       delete_car
     when '4'
-       self.update_price
+       update_price
     when '5'
       dealer_cars_output
+      self.reload
     when '6'
       self.exit_message
     else
@@ -64,6 +65,7 @@ class Dealership < ActiveRecord::Base
     vehicle.cost  = gets.chomp.to_f
     puts ""
     puts ""
+
     vehicle.dealership_id = self.id
     vehicle.save
 
@@ -122,13 +124,14 @@ class Dealership < ActiveRecord::Base
   end
 
   def dealer_cars_output
+    # binding.pry
     self.cars.each do |car|
       puts ""
       puts "Stock number :#{car.stock_number}"
       puts "Year : #{car.year}"
       puts "Make :#{car.make}"
       puts "Model :#{car.model}"
-      ""
+      puts ""
     end
   end
 

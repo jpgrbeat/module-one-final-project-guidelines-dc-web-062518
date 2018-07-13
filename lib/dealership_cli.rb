@@ -37,6 +37,8 @@ def check_if_dealership_exists(dealer)
       n = ask_for_dealership_name
       d = find_dealer_by_name(n)
       check_if_dealership_exists(d)
+    else
+      return dealer
     end
   end
 end

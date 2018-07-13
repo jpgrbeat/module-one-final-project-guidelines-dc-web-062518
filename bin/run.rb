@@ -13,7 +13,6 @@ dealer = Dealership.find_by name: dname
 #checking to see if the object exists, if it doesn't
 #the user is prompted to create a new instance
  dealer = check_if_dealership_exists(dealer)
-  # binding.pry
   if dealer != "exit"
     welcome_dealer(dealer)
 
@@ -21,22 +20,5 @@ dealer = Dealership.find_by name: dname
   # binding.pry
       dealer_prompt
       loop_kill = dealer.function_finder
-
     end
   end
-
- #  dealer = create_new_dealership
- # # dealer.save
- # # dealer.output_dealership_info
- # # dealer.create_new_car
- # dealer.welcome_dealer
-  # dealer = Dealership.find(1)
-  # dealer_prompt
-  # dealer.function_finder
-#find_by_stock_number
- # check_if_dealership_exists(dealer)
-
- puts "hi"
-
- # dealer_name = dealer.name
- # Dealership.find_by(name: dealer_name)

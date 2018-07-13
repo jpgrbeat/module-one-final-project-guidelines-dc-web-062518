@@ -51,7 +51,7 @@ def find_by_stock_number
   input = gets.chomp
 
   vehicle = Car.find_by(stock_number: input)
-  print_vehicle(vehicle)
+  # print_vehicle(vehicle)
   # binding.pry
   if vehicle != nil
     return vehicle
@@ -117,9 +117,9 @@ def delete_car
 
   puts " Are you sure you want to delete this vehicle?"
   input = gets.chomp.downcase
-  case input
-  when "y"
-    Car.destroy(vehicle.id)
+  case input.downcase
+  when "yes"
+    vehicle.destroy
   else
     puts "Aborted"
   end
