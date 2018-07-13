@@ -22,6 +22,22 @@ class Dealership < ActiveRecord::Base
       dealer_cars_output
       self.reload
     when '6'
+      c = find_by_stock_number
+      c.create_new_customer
+    when '7'
+      puts "Enter customer name"
+      input = gets.chomp
+      c = Customer.find_by(name: input)
+      puts "#{c.name} deleted!"
+      c.destroy
+    when '8'
+      c = find_by_stock_number
+      c.email_blast
+      self.email_message
+    when '9'
+      self.mass_marketing
+      self.email_message
+    when '10'
       self.exit_message
     else
       puts "invalid input"
@@ -33,6 +49,22 @@ class Dealership < ActiveRecord::Base
   #   puts ""
   #   puts "This is your personalized inventory system."
   # end
+
+  def get_customer_email
+    puts "Enter customer name..."
+    input = gets.chomp
+    c = Customer.find_by(name: input)
+    if c != nil
+      return c.email
+    else
+      puts "Customer does not exist!"
+    end
+
+  end
+
+  def mass_marketing
+    arr = self.cars.map{|car| car.email_blast}
+  end
 
   def output_dealership_info
     puts "Dealership name: #{self.name}"
@@ -151,6 +183,18 @@ class Dealership < ActiveRecord::Base
 
       print_vehicle(vehicle)
       puts "Vehicle Price: #{vehicle.price}"
+    end
+  end
+
+  def email_message
+    email = []
+    puts "Type send to send email"
+    input = ""
+    while input != "send"
+      input = gets.chomp
+      if input != "send"
+        email << input
+      end
     end
   end
 

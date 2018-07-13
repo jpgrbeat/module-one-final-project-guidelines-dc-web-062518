@@ -22,3 +22,4 @@ dealer = Dealership.find_by name: dname
       loop_kill = dealer.function_finder
     end
   end
+  

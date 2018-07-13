@@ -11,15 +11,17 @@ class Car < ActiveRecord::Base
     puts "What's the #{c.name}'s email address?"
     c.email = gets.chomp
     puts ""
-    puts "What's #{c.names}'s phone number?"
+    puts "What's #{c.name}'s phone number?"
     c.cell = gets.chomp
     puts ""
     puts ""
     c.car_id = self.id
     c.save
+    puts "Customer created!"
   end
 
   def email_blast
-    self.customers.map{|cust| cust.email}
-  end 
+    e = self.customers.map{|cust| cust.email}
+    puts e.join(", ")
+  end
 end

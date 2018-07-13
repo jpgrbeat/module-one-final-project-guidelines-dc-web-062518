@@ -84,6 +84,10 @@ def dealer_prompt
   puts "3. Remove a car from inventory"
   puts "4. Update vehicle price"
   puts "5. Print Inventory"
-  puts "6. Exit"
+  puts "6. Create new customer by car"
+  puts "7. Delete customer"
+  puts "8. Send email's to all customers interested in a car "
+  puts "9. Market to all customers of dealership"
+  puts "10. Exit"
   puts ""
 end
