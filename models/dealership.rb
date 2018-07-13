@@ -179,10 +179,18 @@ class Dealership < ActiveRecord::Base
       puts ""
 
       vehicle.price = gets.chomp
-      save_prompt(vehicle)
+      # save_prompt(vehicle)
 
       print_vehicle(vehicle)
       puts "Vehicle Price: #{vehicle.price}"
+      puts " Would you like to let customer's interested in this car know?Y/N"
+
+      input = gets.chomp
+
+      if input == 'Y'
+        vehicle.email_blast
+        self.email_message
+      end 
     end
   end
 
